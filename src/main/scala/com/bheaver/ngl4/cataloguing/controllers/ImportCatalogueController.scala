@@ -5,7 +5,7 @@ import com.bheaver.ngl4.cataloguing.services.ImportCatalogueService
 import org.springframework.beans.factory.annotation.{Autowired, Qualifier}
 import org.springframework.web.bind.annotation.{PostMapping, RequestBody, RequestMapping, RestController}
 import reactor.core.publisher.{Flux, Mono}
-import com.bheaver.ngl4.cataloguing.model.CatalogueRecordImplicitJSONWrites._;
+import com.bheaver.ngl4.cataloguing.model.CatalogueRecordImplicitJSONWrites._
 import play.api.libs.json.Json;
 @RestController
 @RequestMapping(path = Array("/cataloguing"))

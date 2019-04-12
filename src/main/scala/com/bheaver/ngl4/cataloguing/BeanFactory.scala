@@ -1,6 +1,8 @@
 package com.bheaver.ngl4.cataloguing
 
-import com.bheaver.ngl4.cataloguing.services.{ImportCatalogueService, ImportCatalogueServiceImpl}
+import com.bheaver.ngl4.cataloguing.services.{CataloguingInitialLoadService, CataloguingInitialLoadServiceImpl, ImportCatalogueService, ImportCatalogueServiceImpl}
+import com.bheaver.ngl4.util.mongoUtils.Database
+import org.springframework.beans.factory.annotation.{Autowired, Qualifier}
 import org.springframework.context.annotation.{Bean, ComponentScan, Configuration}
 
 import scala.io.Source
@@ -18,5 +20,9 @@ class BeanFactory {
   @Bean(Array("ImportCatalogueService"))
   def getImportCatalogueService: ImportCatalogueService = {
     new ImportCatalogueServiceImpl
+  }
+  @Bean(Array("CataloguingInitialLoadService"))
+  def getCataloguingInitialLoadService(@Autowired @Qualifier("Database") database: Database): CataloguingInitialLoadService = {
+    new CataloguingInitialLoadServiceImpl(database)
   }
 }

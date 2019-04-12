@@ -1,7 +1,5 @@
 package com.bheaver.ngl4.cataloguing.model
 
-import java.util
-
 import play.api.libs.json.{JsValue, Json, Writes}
 
 import scala.beans.BeanProperty
