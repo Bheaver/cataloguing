@@ -1,9 +1,10 @@
 package com.bheaver.ngl4.cataloguing
 
-import com.bheaver.ngl4.cataloguing.services.{CataloguingInitialLoadService, CataloguingInitialLoadServiceImpl, ImportCatalogueService, ImportCatalogueServiceImpl}
+import com.bheaver.ngl4.cataloguing.services.{CataloguingInitialLoadService, CataloguingInitialLoadServiceImpl, ImportCatalogueService, ImportCatalogueServiceImpl, MarcDictionaryService, UniversalMarcDictionary}
 import com.bheaver.ngl4.util.mongoUtils.Database
 import org.springframework.beans.factory.annotation.{Autowired, Qualifier}
-import org.springframework.context.annotation.{Bean, ComponentScan, Configuration}
+import org.springframework.context.annotation.{Bean, ComponentScan, Configuration, DependsOn}
+import play.api.libs.json.{JsValue, Json}
 
 import scala.io.Source
 
@@ -21,8 +22,21 @@ class BeanFactory {
   def getImportCatalogueService: ImportCatalogueService = {
     new ImportCatalogueServiceImpl
   }
+
   @Bean(Array("CataloguingInitialLoadService"))
   def getCataloguingInitialLoadService(@Autowired @Qualifier("Database") database: Database): CataloguingInitialLoadService = {
     new CataloguingInitialLoadServiceImpl(database)
+  }
+
+  @Bean(Array("MarcDictionaryService"))
+  @DependsOn(Array("MarcDictionaryJson"))
+  def getMarcDicitionaryService(@Qualifier("MarcDictionaryJson")json: List[JsValue]): MarcDictionaryService ={
+    new UniversalMarcDictionary(json)
+  }
+
+  @Bean(Array("MarcDictionaryJson"))
+  def getMARCDictionaryJSON(): List[JsValue] = {
+    val jsonStr = Source.fromResource("marcDictionary/test.json").getLines().toArray.mkString
+    Json.parse(jsonStr).as[List[JsValue]]
   }
 }

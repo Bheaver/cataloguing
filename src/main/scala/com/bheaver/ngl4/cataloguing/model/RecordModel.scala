@@ -4,20 +4,20 @@ import play.api.libs.json.{JsValue, Json, Writes}
 
 import scala.beans.BeanProperty
 
-case class RecordModel(@BeanProperty leader: String,
-                       @BeanProperty controlFields: List[ControlField],
-                       @BeanProperty dataFields: List[DataField])
+case class RecordModel(leader: String,
+                       controlFields: List[ControlField],
+                       dataFields: List[DataField])
 
-case class ControlField(@BeanProperty tag: String,
-                        @BeanProperty data: String)
+case class ControlField(tag: String,
+                        data: String)
 
-case class DataField(@BeanProperty tag: String,
-                     @BeanProperty indicator1: Char,
-                     @BeanProperty indicator2: Char,
-                     @BeanProperty subFields: List[SubField])
+case class DataField(tag: String,
+                     indicator1: Char,
+                     indicator2: Char,
+                     subFields: List[SubField])
 
-case class SubField(@BeanProperty identifier: Char,
-                    @BeanProperty data: String)
+case class SubField(identifier: Char,
+                    data: String)
 
 
 object CatalogueRecordImplicitJSONWrites {
