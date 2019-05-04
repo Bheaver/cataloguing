@@ -7,6 +7,7 @@ import org.springframework.context.annotation.{Bean, ComponentScan, Configuratio
 import play.api.libs.json.{JsValue, Json}
 
 import scala.io.Source
+import scala.xml._
 
 @Configuration
 @ComponentScan(basePackages = Array("com.bheaver.ngl4.util","com.bheaver.ngl4.util.filters","com.bheaver.ngl4.util.config"))
@@ -29,14 +30,13 @@ class BeanFactory {
   }
 
   @Bean(Array("MarcDictionaryService"))
-  @DependsOn(Array("MarcDictionaryJson"))
-  def getMarcDicitionaryService(@Qualifier("MarcDictionaryJson")json: List[JsValue]): MarcDictionaryService ={
-    new UniversalMarcDictionary(json)
+  @DependsOn(Array("MarcDictionaryXMLEle"))
+  def getMarcDicitionaryService(@Qualifier("MarcDictionaryXMLEle")elem: Elem): MarcDictionaryService ={
+    new UniversalMarcDictionary(elem)
   }
 
-  @Bean(Array("MarcDictionaryJson"))
-  def getMARCDictionaryJSON(): List[JsValue] = {
-    val jsonStr = Source.fromResource("marcDictionary/test.json").getLines().toArray.mkString
-    Json.parse(jsonStr).as[List[JsValue]]
+  @Bean(Array("MarcDictionaryXMLEle"))
+  def getMARCDictionaryXML():Elem = {
+    XML.loadString(Source.fromResource("marcDictionary/Biblio.xml").getLines().toArray.mkString)
   }
 }

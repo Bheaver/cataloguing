@@ -10,6 +10,7 @@ object Versions {
   val jose4jVersion = "0.6.5"
   val marc4jVersion = "2.8.3"
   val playJsonVersion = "2.7.2"
+  val scalaxmlVersion = "1.2.0"
 }
 
 object NGLVersions {
@@ -35,9 +36,12 @@ object Dependencies {
 
   val playJson = "com.typesafe.play" %% "play-json" % Versions.playJsonVersion
 
+  val scalaxml = "org.scala-lang.modules" %% "scala-xml" % Versions.scalaxmlVersion
+
+  
   val coreDependencies = Seq(springBootWebFlux, reactiveMongoStreams,
     mongoAsyncCore,reactiveStreams,mongoJavaDriver, log4j2API,
-    log4j2Core,log4j2ScalaAPI,guava,jose4j, marc4j, playJson)
+    log4j2Core,log4j2ScalaAPI,guava,jose4j, marc4j, playJson, scalaxml)
 
 }
 object NGLDependencies {
