@@ -36,7 +36,8 @@ case class IndicatorDictionary(val definition: String,
                                val description: String,
                                val userDefinition: String,
                                val userDescription: String,
-                               val indicator: List[IndicatorValueDictionary])
+                               val indicator: List[IndicatorValueDictionary],
+                               val input: Boolean)
 
 
 case class TagInfoDictionary(val definition: String,
@@ -67,7 +68,8 @@ object MarcDictionaryModelWrites {
       "examples" -> o.example,
       "userExamples" -> o.userExample,
       "repeat" -> o.repeat,
-      "value" -> o.value
+      "value" -> o.value,
+
     )
   }
   implicit val subFieldDictionaryWrites = new Writes[SubFieldDictionary] {
@@ -97,7 +99,8 @@ object MarcDictionaryModelWrites {
       "description" -> o.description,
       "userDefinition" -> o.userDefinition,
       "userDescription" -> o.userDescription,
-      "indicator" -> o.indicator
+      "indicator" -> o.indicator,
+      "input" -> o.input
     )
   }
   implicit val getMarcDictionarySubFieldsIndicatorsResponseWrites = new Writes[GetMarcDictionarySubFieldsIndicatorsResponse] {

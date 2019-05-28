@@ -36,8 +36,8 @@ object CataloguingInitialLoadImplicitWrites {
   implicit val CataloguingTemplateWrites = new Writes[CatalogueTemplate] {
     override def writes(o: CatalogueTemplate): JsValue = {
       Json.obj(
-        "name" -> o.name,
-        "template" -> o.template
+        "code" -> o.name,
+        "value" -> o.template
       )
     }
   }
